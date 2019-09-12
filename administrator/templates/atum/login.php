@@ -121,7 +121,7 @@ HTMLHelper::_('atum.rootcolors', $this->params);
 
 	<div class="container-fluid container-main order-1">
 		<section id="content" class="content h-100">
-			<main class="d-flex justify-content-center align-items-center">
+			<main class="d-flex justify-content-center align-items-center h-100">
 				<div class="main-wrap">
 					<div class="main-sidebar">
 						<div class="main-brand text-center">

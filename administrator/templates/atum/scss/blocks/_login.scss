@@ -1,9 +1,19 @@
 // Login page
 
 .view-login {
-  background: red;
   .container-main {
-
+    background-color: var(--link-color) ;
+    z-index: 10;
+    &:before{
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left:0;
+      right:0;
+      background-image: linear-gradient(to top, rgba(0, 0, 0, 0.3), transparent);
+      z-index: -1;
+    }
     @include media-breakpoint-down(sm) {
       min-height: calc(100vh - 35vh);
       flex-wrap: wrap;
@@ -20,7 +30,40 @@
       }
     }
   }
-
+  .main-wrap{
+    display: -ms-flexbox;
+    display: flex;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 20px 30px 60px -10px rgba(0, 28, 73, 0.3);
+    max-width: 860px;
+    width: 100%;
+    .main-sidebar{
+      background: var(--color);
+      flex: 0 0 40%;
+      max-width: 40%;
+      padding: 2.5rem;
+      color: var(--inverse-color);
+    }
+    .main-informations{
+      text-align: left;
+      ul>li{
+        &:not(:last-child){
+          margin-bottom: 12px;
+        }
+        &:before {
+          content: "\f058";
+          font-family: "Font Awesome 5 Pro";
+          margin-right: 10px;
+        }
+      }
+    }
+    .login{
+      flex: 0 0 60%;
+      max-width: 60%;
+      padding: 6.4rem;
+    }
+  }
   .login-bg-grad {
     position: fixed;
     z-index: $zindex-negative;
@@ -46,14 +89,9 @@
   }
 
   .login {
-    width: 25rem;
     background: var(--white);
     padding: 15px;
     color: var(--atum-text-dark);
-    border-radius: 3px;
-    margin-top: 10rem;
-    align-self: flex-start;
-    box-shadow: 0 0 10px 0 #ccc;
 
     @include media-breakpoint-down(md) {
       margin-top: 3rem;
@@ -79,11 +117,6 @@
         }
       }
 
-    }
-
-    #btn-login-submit {
-      background: var(--atum-bg-dark);
-      color:rgba(255,255,255,0.8);
     }
   }
 

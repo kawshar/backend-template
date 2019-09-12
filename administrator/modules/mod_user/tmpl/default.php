@@ -25,7 +25,7 @@ $hideLinks = $app->input->getBool('hidemainmenu');
 	</button>
 
 
-	<!--
+	
 
 	@TODO: User menu dropdown must be completed
 
@@ -47,12 +47,12 @@ $hideLinks = $app->input->getBool('hidemainmenu');
 			</a>
 		</div>
 		<div class="dropdown-item">
-			<?php /*$route = 'index.php?option=com_login&task=logout&amp;' . Session::getFormToken() . '=1'; */?>
-			<a href="<?php /*echo Route::_($route); */?>">
+			<?php $route = 'index.php?option=com_login&task=logout&amp;' . Session::getFormToken() . '=1'; ?>
+			<a href="<?php echo Route::_($route); ?>">
 				<span class="fa fa-power-off"></span>
-				<?php /*echo Text::_('JLOGOUT'); */?>
+				<?php echo Text::_('JLOGOUT'); ?>
 			</a>
 		</div>
-	</div>-->
+	</div>
 
 </div>
