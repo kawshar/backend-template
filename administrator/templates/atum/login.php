@@ -130,13 +130,13 @@ HTMLHelper::_('atum.rootcolors', $this->params);
 								alt="<?php echo htmlspecialchars($this->params->get('altLoginLogo', ''), ENT_COMPAT, 'UTF-8'); ?>">
 							</div> <!-- /.main-brand-logo -->
 							<div class="main-greetings">
-								<h3><?php echo JText::_('COM_CPANEL_WELCOME_BEGINNERS_TITLE'); ?></h3>
+								<h3><?php echo JText::_('TPL_ATUM_WELCOME_BEGINNERS_TITLE'); ?></h3>
 							</div>
 							<div class="main-informations">
 								<ul>
-									<li><?php echo JText::_('COM_CPANEL_INFO_OPENSOURCE_INFRASTRUCTURE'); ?></li>
-									<li><?php echo JText::_('COM_CPANEL_INFO_CONTENT_MANAGEMENT'); ?></li>
-									<li><?php echo JText::_('COM_CPANEL_INFO_EXTENSIONS'); ?></li>
+									<li><?php echo JText::_('TPL_ATUM_INFO_OPENSOURCE_INFRASTRUCTURE'); ?></li>
+									<li><?php echo JText::_('TPL_ATUM_INFO_CONTENT_MANAGEMENT'); ?></li>
+									<li><?php echo JText::_('TPL_ATUM_INFO_EXTENSIONS'); ?></li>
 								</ul>
 							</div>
 							<jdoc:include type="modules" name="sidebar" style="body" />
