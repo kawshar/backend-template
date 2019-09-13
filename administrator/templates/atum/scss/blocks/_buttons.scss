@@ -16,6 +16,7 @@
     background-color: rgba(var(--color-rgb), 0.1);
     box-shadow: 0 1px 1px 0 rgba(var(--color-rgb), 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.03);
     text-decoration: none;
+    border-radius: 3px;
     transition: .3s;
     &[disabled], &.disabled, &:disabled{
         pointer-events: none;
@@ -36,6 +37,8 @@
     }
     &:hover, &:focus, &:focus:active, &:active{
         box-shadow: 0 6px 10px -3px rgba(0, 0, 0, 0.1), 0 1px 0 0 rgba(0, 0, 0, 0.03);
+        text-decoration: none;
+        
     }
     &.btn-md{
         padding: 0 1.857rem;
@@ -80,6 +83,13 @@
             pointer-events: none;
             background-image: none;
             color: var(--secondary-icon-color);
+        }
+    }
+    &.btn-solid-primary{
+        background-image: linear-gradient(to bottom, var(--primary-gradient-color) 1%, var(--link-color));
+        color: var(--inverse-color);
+        &:hover, &:focus{
+            opacity: .8;
         }
     }
     &.btn-secondary{
@@ -198,5 +208,9 @@
         &:focus, &:focus:active, &:not(:disabled):not(.disabled):active:focus{
             box-shadow: 0 0px 0px 1px #fff, 0 0px 0px 2px var(--warning-color);
         }
+    }
+    &.btn-block{
+        display: block;
+        width: 100%;
     }
 }

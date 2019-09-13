@@ -39,7 +39,7 @@ $siteLogo  = $this->params->get('siteLogo')
 	: $this->baseurl . '/templates/' . $this->template . '/images/logo-joomla-blue.svg';
 $loginLogo = $this->params->get('loginLogo')
 	? JUri::root() . $this->params->get('loginLogo')
-	: $this->baseurl . '/templates/' . $this->template . '/images/logo-blue.svg';
+	: $this->baseurl . '/templates/' . $this->template . '/images/logo-white.svg';
 $smallLogo = $this->params->get('smallLogo')
 	? JUri::root() . $this->params->get('smallLogo')
 	: $this->baseurl . '/templates/' . $this->template . '/images/logo-blue.svg';
@@ -97,25 +97,6 @@ HTMLHelper::_('atum.rootcolors', $this->params);
 		<?php echo Text::_('JGLOBAL_WARNJAVASCRIPT'); ?>
 	</div>
 </noscript>
-
-
-<header id="header" class="header">
-	<div class="d-flex">
-		<div class="header-title d-flex">
-			<div class="d-flex">
-				<?php // No home link in edit mode (so users can not jump out) and control panel (for a11y reasons) ?>
-				<div class="logo">
-					<img src="<?php echo $siteLogo; ?>" alt="<?php echo $logoAlt; ?>">
-					<img class="logo-small" src="<?php echo $smallLogo; ?>" alt="<?php echo $logoSmallAlt; ?>">
-				</div>
-			</div>
-			<jdoc:include type="modules" name="title" />
-		</div>
-		<div class="header-items d-flex">
-			<jdoc:include type="modules" name="status" style="header-item" />
-		</div>
-	</div>
-</header>
 
 <div id="wrapper" class="d-flex wrapper">
 

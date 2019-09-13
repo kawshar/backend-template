@@ -8,6 +8,9 @@ html {
 body {
    min-height: 100%;
    font-family: "Helvetica Neue", "Segoe UI", "SF Pro Text", "SF Pro Display", "SF UI Text", "SF UI Display", "Roboto", "Noto Sans", "Droid Sans", "Ubuntu","Oxygen", "Fira Sans", -apple-system, BlinkMacSystemFont, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+   text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -186,13 +189,6 @@ a[target="_blank"]::before {
 }
 .text-muted{
   color: var(--atum-text-dark);
-}
-
-// dashboard items
-.menu-quicktask,
-.menu-badge {
-  float: right;
-  min-width: 1rem;
 }
 
 .cpanel-help .card-columns,
