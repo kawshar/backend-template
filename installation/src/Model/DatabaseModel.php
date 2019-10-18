@@ -11,7 +11,6 @@ namespace Joomla\CMS\Installation\Model;
 
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Extension\ExtensionHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Folder;
@@ -19,6 +18,7 @@ use Joomla\CMS\Installation\Helper\DatabaseHelper;
 use Joomla\CMS\Installer\Installer;
 use Joomla\CMS\Language\LanguageHelper;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\Object\CMSObject;
 use Joomla\CMS\Version;
 use Joomla\Database\DatabaseDriver;
 use Joomla\Database\DatabaseInterface;
@@ -790,7 +790,7 @@ class DatabaseModel extends BaseInstallationModel
 	/**
 	 * Cms tables and data post install process.
 	 *
-	 * @param   \JDatabaseDriver  $db  Database connector object $db*.
+	 * @param   DatabaseDriver  $db  Database connector object $db*.
 	 *
 	 * @return  void
 	 *
@@ -811,7 +811,7 @@ class DatabaseModel extends BaseInstallationModel
 	/**
 	 * Method to update the user id of sql data content to the new rand user id.
 	 *
-	 * @param   \JDatabaseDriver  $db  Database connector object $db*.
+	 * @param   DatabaseDriver  $db  Database connector object $db*.
 	 *
 	 * @return  void
 	 *
@@ -864,7 +864,7 @@ class DatabaseModel extends BaseInstallationModel
 	/**
 	 * Method to update the dates of sql data content to the current date.
 	 *
-	 * @param   \JDatabaseDriver  $db  Database connector object $db*.
+	 * @param   DatabaseDriver  $db  Database connector object $db*.
 	 *
 	 * @return  void
 	 *
@@ -925,11 +925,11 @@ class DatabaseModel extends BaseInstallationModel
 	/**
 	 * Method to check for the testing sampledata plugin.
 	 *
-	 * @param   \JDatabaseDriver  $db  Database connector object $db*.
+	 * @param   DatabaseDriver  $db  Database connector object $db*.
 	 *
 	 * @return  void
 	 *
-	 * @since   __DEPLOY_VERSION__
+	 * @since   4.0.0
 	 */
 	public function checkTestingSampledata($db)
 	{
@@ -941,6 +941,7 @@ class DatabaseModel extends BaseInstallationModel
 		}
 
 		$testingPlugin = new \stdClass;
+		$testingPlugin->extension_id = null;
 		$testingPlugin->name = 'plg_sampledata_testing';
 		$testingPlugin->type = 'plugin';
 		$testingPlugin->element = 'testing';
@@ -951,14 +952,24 @@ class DatabaseModel extends BaseInstallationModel
 		$testingPlugin->manifest_cache = '';
 		$testingPlugin->params = '{}';
 
-		$db->insertObject('#__extensions', $testingPlugin);
+		$db->insertObject('#__extensions', $testingPlugin, 'extension_id');
+
+		$installer = new Installer;
+
+		if (!$installer->refreshManifestCache($testingPlugin->extension_id))
+		{
+			Factory::getApplication()->enqueueMessage(
+				Text::sprintf('INSTL_DATABASE_COULD_NOT_REFRESH_MANIFEST_CACHE', $testingPlugin->name),
+				'error'
+			);
+		}
 	}
 
 	/**
 	 * Method to backup all tables in a database with a given prefix.
 	 *
-	 * @param   \JDatabaseDriver  $db      JDatabaseDriver object.
-	 * @param   string            $prefix  Database table prefix.
+	 * @param   DatabaseDriver  $db      JDatabaseDriver object.
+	 * @param   string          $prefix  Database table prefix.
 	 *
 	 * @return  boolean  True on success.
 	 *
@@ -1015,10 +1026,10 @@ class DatabaseModel extends BaseInstallationModel
 	/**
 	 * Method to create a new database.
 	 *
-	 * @param   \JDatabaseDriver  $db       JDatabase object.
-	 * @param   \JObject          $options  JObject coming from "initialise" function to pass user
-	 *                                      and database name to database driver.
-	 * @param   boolean           $utf      True if the database supports the UTF-8 character set.
+	 * @param   DatabaseDriver  $db       Database object.
+	 * @param   CMSObject       $options  CMSObject coming from "initialise" function to pass user
+	 *                                    and database name to database driver.
+	 * @param   boolean         $utf      True if the database supports the UTF-8 character set.
 	 *
 	 * @return  boolean  True on success.
 	 *
@@ -1044,8 +1055,8 @@ class DatabaseModel extends BaseInstallationModel
 	/**
 	 * Method to delete all tables in a database with a given prefix.
 	 *
-	 * @param   \JDatabaseDriver  $db      JDatabaseDriver object.
-	 * @param   string            $prefix  Database table prefix.
+	 * @param   DatabaseDriver  $db      JDatabaseDriver object.
+	 * @param   string          $prefix  Database table prefix.
 	 *
 	 * @return  boolean  True on success.
 	 *
